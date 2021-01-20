@@ -15,8 +15,7 @@ class Bike(models.Model):
     ]
     make = models.CharField(max_length=30, blank=False, null=False)
     model = models.CharField(max_length=30, blank=False, null=False)
-    type = models.InegerField(
-        max_length=2,
+    type = models.IntegerField(
         choices=BIKE_TYPE_CHOICES,
         blank=False,
         null=False
