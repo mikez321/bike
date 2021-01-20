@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bike.urls'
+ROOT_URLCONF = 'code.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bike.wsgi.application'
+WSGI_APPLICATION = 'code.wsgi.application'
 
 
 # Database
