@@ -1,1 +1,4 @@
 env
+Pycache
+*.sqlite3
+.env
