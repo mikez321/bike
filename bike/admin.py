@@ -1,3 +1,6 @@
+"""Admin site setup for bike app."""
 from django.contrib import admin
+from bike.models import Bike
 
-# Register your models here.
+
+admin.site.register(Bike)
