@@ -62,6 +62,7 @@ class RearWheel(GenericWheel):
         (3, "XDR"),
         (4, "Shimano Micro Spline"),
         (5, "Campagnolo"),
+        (6, "Other"),
     ]
     driver = models.IntegerField(
         choices=FREEHUB_CHOICES,
