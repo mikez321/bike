@@ -3,7 +3,7 @@
 from django.test import TestCase
 from wheel.models import RearWheel
 from wheel.serializers import RearWheelSerializer
-from IPython import embed
+
 
 class RearWheelSerializerTest(TestCase):
     """Testing for Front Wheel serializer."""
@@ -48,7 +48,7 @@ class RearWheelSerializerTest(TestCase):
             self.assertFalse(key in data.keys())
 
     def test_custom_validations(self):
-        """Test for custom validations."""
+        """Test custom validations regarding fixed and SS wheels."""
         self.r_wheel_attributes['fixed'] = True
         serializer = RearWheelSerializer(
             instance=self.f_wheel,
