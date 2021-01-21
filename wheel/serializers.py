@@ -1,7 +1,6 @@
 """Wheel serializer."""
 from wheel.models import FrontWheel, RearWheel
 from rest_framework import serializers
-from IPython import embed
 
 
 class FrontWheelSerializer(serializers.ModelSerializer):

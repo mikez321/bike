@@ -1,7 +1,7 @@
 from rest_framework.test import APIClient
 from django.test import TestCase
 from bike.models import Bike
-from IPython import embed
+
 
 class BikeEndpointTest(TestCase):
     def setUp(self):
@@ -33,7 +33,7 @@ class BikeEndpointTest(TestCase):
         self.assertEqual(len(response.data), num_bikes)
 
     def test_bike_detail(self):
-        """GET request for a bike by pk."""
+        """GET request for a single bike by pk."""
         response = self.client.get('/bikes/2/')
         self.assertEqual(response.status_code, 200)
 
@@ -43,7 +43,7 @@ class BikeEndpointTest(TestCase):
         self.assertEqual(response.data['id'], bike2.id)
 
     def test_bike_creation(self):
-        """POST rquest to add a bike."""
+        """POST request to add a bike."""
         num_starting_bikes = Bike.objects.count()
         self.assertEqual(num_starting_bikes, 2)
 
