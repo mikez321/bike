@@ -1,5 +1,6 @@
 """Bike app models found here."""
 from django.db import models
+from wheel.models import FrontWheel, RearWheel
 
 
 class Bike(models.Model):
@@ -37,6 +38,18 @@ class Bike(models.Model):
         default=3,
         blank=False,
         null=False,
+    )
+    f_wheel = models.OneToOneField(
+        FrontWheel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    r_wheel = models.OneToOneField(
+        RearWheel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
