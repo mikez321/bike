@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from bike import views
+from bike import views as bikeviews
+from wheel import views as wheelviews
 
 bike_router = routers.DefaultRouter()
-bike_router.register(r'bikes', views.BikeViewSet)
+wheel_router = routers.DefaultRouter()
+bike_router.register(r'bikes', bikeviews.BikeViewSet, basename='bikes')
+wheel_router.register(r'front', wheelviews.FrontWheelViewSet, basename='frontwheel')
+wheel_router.register(r'rear', wheelviews.RearWheelViewSet, basename='rearwheel')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(bike_router.urls)),
+    path('wheels/', wheelviews.WheelList.as_view()),
+    path('wheels/', include(wheel_router.urls)),
 ]
