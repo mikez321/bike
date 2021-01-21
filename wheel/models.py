@@ -68,8 +68,12 @@ class RearWheel(GenericWheel):
         blank=False,
         null=False,
     )
-    single_speed_only = models.BooleanField(blank=False, null=False)
-    fixed = models.BooleanField(blank=False, null=False)
+    single_speed_only = models.BooleanField(
+        default=False,
+        blank=False,
+        null=False
+    )
+    fixed = models.BooleanField(default=False, blank=False, null=False)
 
     def __str__(self):
         """Magic string method."""
