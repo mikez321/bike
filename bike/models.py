@@ -41,12 +41,14 @@ class Bike(models.Model):
     )
     f_wheel = models.OneToOneField(
         FrontWheel,
+        default=None,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
     r_wheel = models.OneToOneField(
         RearWheel,
+        default=None,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
