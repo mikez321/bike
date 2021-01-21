@@ -8,7 +8,7 @@ class GenericWheel(models.Model):
     WHEEL_AXLE_CHOICES = [
         (1, "QR"),
         (2, "Thru"),
-        (3, "Proprietary"),
+        (3, "Other"),
     ]
     WHEEL_MATERIAL_OPTIONS = [
         (1, "Carbon"),
@@ -27,6 +27,7 @@ class GenericWheel(models.Model):
     tubeless = models.BooleanField(default=True, blank=True, null=True)
     axle = models.IntegerField(
         choices=WHEEL_AXLE_CHOICES,
+        default=3,
         blank=False,
         null=False,
     )

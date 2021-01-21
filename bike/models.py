@@ -16,6 +16,7 @@ class Bike(models.Model):
     AXLE_TYPE_CHOICES = [
         (1, 'QR'),
         (2, 'Thru'),
+        (3, 'Other'),
     ]
     make = models.CharField(max_length=30, blank=False, null=False)
     model = models.CharField(max_length=30, blank=False, null=False)
@@ -26,12 +27,14 @@ class Bike(models.Model):
     )
     description = models.TextField(max_length=200, blank=True, null=True)
     f_axle = models.IntegerField(
-        choices = AXLE_TYPE_CHOICES,
+        choices=AXLE_TYPE_CHOICES,
+        default=3,
         blank=False,
         null=False,
     )
     r_axle = models.IntegerField(
-        choices = AXLE_TYPE_CHOICES,
+        choices=AXLE_TYPE_CHOICES,
+        default=3,
         blank=False,
         null=False,
     )
