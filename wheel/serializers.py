@@ -3,6 +3,27 @@ from wheel.models import FrontWheel, RearWheel
 from rest_framework import serializers
 
 
+class GenericWheelSerializer(serializers.Serializer):
+    """Generic wheel serializer for all wheels list view."""
+
+    type = serializers.SerializerMethodField()
+    id = serializers.IntegerField(read_only=True)
+    manufacturer = serializers.CharField(
+        required=True,
+        allow_blank=False,
+        max_length=30,
+    )
+    model = serializers.CharField(
+        required=True,
+        allow_blank=False,
+        max_length=30,
+    )
+
+    def get_type(self, obj):
+        """Return class name of an object for identification."""
+        return obj.__class__.__name__
+
+
 class FrontWheelSerializer(serializers.ModelSerializer):
     """Serializer for FrontWheel object."""
 
