@@ -16,6 +16,7 @@ class BikeSerializerTest(TestCase):
             'model': 'Goodship',
             'type': 1,
             'description': 'A steel and carbon road bike.',
+            'brake_type': 2,
             'f_axle': 1,
             'r_axle': 1,
         }
@@ -59,6 +60,8 @@ class BikeSerializerTest(TestCase):
             'description',
             'f_axle',
             'r_axle',
+            'brake_type',
+            'brake_type',
             'f_wheel',
             'r_wheel',
         ]
@@ -119,4 +122,17 @@ class BikeSerializerTest(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertTrue(
             'Axle types must match!' in serializer.errors['non_field_errors']
+        )
+
+    def test_more_custom_validations(self):
+        """Brake types must match between wheels and bikes."""
+        self.bike_attributes['f_wheel'] = self.f_wheel.id
+        self.bike_attributes['brake_type'] = 1
+        serializer = BikeSerializer(
+            instance=self.bike,
+            data=self.bike_attributes
+        )
+        self.assertFalse(serializer.is_valid())
+        self.assertTrue(
+            'Brake types must match!' in serializer.errors['non_field_errors']
         )
