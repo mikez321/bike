@@ -1,9 +1,13 @@
+"""Test Bike Viewset."""
+
 from rest_framework.test import APIClient
 from django.test import TestCase
 from bike.models import Bike
 
 
 class BikeEndpointTest(TestCase):
+    """Testing for CRUD endpoints of bikes."""
+
     def setUp(self):
         """Create a bike to test and a client to make requests."""
         self.client = APIClient()

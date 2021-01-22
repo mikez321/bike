@@ -23,7 +23,6 @@ class BikeSerializer(serializers.ModelSerializer):
                 )
         return data
 
-
     class Meta:
         model = Bike
         exclude = ['created_at', 'modified_at']
