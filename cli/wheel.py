@@ -4,15 +4,16 @@ from IPython import embed
 class Wheel(object):
     """A regular 'ol wheel."""
 
-    def __init__(self, f_wheel_attributes):
+    def __init__(self, wheel_attributes):
         """Front wheel object created from json response."""
-        self.manufacturer = f_wheel_attributes['manufacturer']
-        self.model = f_wheel_attributes['model']
-        self.is_disc = f_wheel_attributes['is_disc']
-        self.tubeless = f_wheel_attributes['tubeless']
-        self.axle = f_wheel_attributes['axle']
-        self.spoke_count = f_wheel_attributes['spoke_count']
-        self.material = f_wheel_attributes['material']
+        self.db_ref = wheel_attributes['id']
+        self.manufacturer = wheel_attributes['manufacturer']
+        self.model = wheel_attributes['model']
+        self.is_disc = wheel_attributes['is_disc']
+        self.tubeless = wheel_attributes['tubeless']
+        self.axle = wheel_attributes['axle']
+        self.spoke_count = wheel_attributes['spoke_count']
+        self.material = wheel_attributes['material']
 
     @property
     def axle_type(self):

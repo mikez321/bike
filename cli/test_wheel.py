@@ -10,6 +10,7 @@ class FrontWheelTest(unittest.TestCase):
     def test_it_exists(self):
         """A newly created wheel is an instance of FrontWheel and has attributes."""
         f_wheel_attributes = {
+            'id': 1,
             'manufacturer': 'Specialized',
             'model': 'Stout',
             'is_disc': True,
@@ -20,6 +21,7 @@ class FrontWheelTest(unittest.TestCase):
         }
         f_wheel = FrontWheel(f_wheel_attributes)
         self.assertEqual(type(f_wheel), FrontWheel)
+        self.assertEqual(f_wheel.db_ref, 1)
         self.assertEqual(f_wheel.manufacturer, 'Specialized')
         self.assertEqual(f_wheel.model, 'Stout')
         self.assertEqual(f_wheel.is_disc, True)
@@ -31,6 +33,7 @@ class FrontWheelTest(unittest.TestCase):
     def test_front_wheel_properties(self):
         """Testing of model methods and properties."""
         f_wheel_attributes = {
+            'id': 1,
             'manufacturer': 'Specialized',
             'model': 'Stout',
             'is_disc': True,
@@ -51,6 +54,7 @@ class RearWheelTest(unittest.TestCase):
     def test_it_exists(self):
         """A wheel is an instance of RearWheel and has attributes."""
         r_wheel_attributes = {
+            'id': 1,
             'manufacturer': 'Specialized',
             'model': 'Stout',
             'is_disc': True,
@@ -64,6 +68,7 @@ class RearWheelTest(unittest.TestCase):
         }
         r_wheel = RearWheel(r_wheel_attributes)
         self.assertEqual(type(r_wheel), RearWheel)
+        self.assertEqual(r_wheel.db_ref, 1)
         self.assertEqual(r_wheel.manufacturer, 'Specialized')
         self.assertEqual(r_wheel.model, 'Stout')
         self.assertEqual(r_wheel.is_disc, True)
@@ -78,6 +83,7 @@ class RearWheelTest(unittest.TestCase):
     def test_rear_wheel_properties(self):
         """Testing of model methods and properties."""
         r_wheel_attributes = {
+            'id': 1,
             'manufacturer': 'Specialized',
             'model': 'Stout',
             'is_disc': True,
