@@ -38,6 +38,11 @@ class Wheel(object):
 class FrontWheel(Wheel):
     """A front wheel is basically a generic wheel."""
 
+    @property
+    def wheel_type(self):
+        """Front wheels are of type 'front'."""
+        return 'front'
+
 
 class RearWheel(Wheel):
     """A rear wheel object."""
@@ -61,3 +66,8 @@ class RearWheel(Wheel):
             6: "other",
         }
         return DRIVER_TYPES[self.driver]
+
+    @property
+    def wheel_type(self):
+        """Rear wheels are of type 'rear'."""
+        return 'rear'

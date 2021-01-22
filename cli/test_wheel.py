@@ -42,6 +42,7 @@ class FrontWheelTest(unittest.TestCase):
         f_wheel = FrontWheel(f_wheel_attributes)
         self.assertEqual(f_wheel.axle_type, 'ta')
         self.assertEqual(f_wheel.material_type, 'alloy')
+        self.assertEqual(f_wheel.wheel_type, 'front')
 
 
 class RearWheelTest(unittest.TestCase):
@@ -92,6 +93,7 @@ class RearWheelTest(unittest.TestCase):
         self.assertEqual(r_wheel.axle_type, 'ta')
         self.assertEqual(r_wheel.material_type, 'alloy')
         self.assertEqual(r_wheel.driver_type, 'shimano/sram 11s')
+        self.assertEqual(r_wheel.wheel_type, 'rear')
 
 
 if __name__ == '__main__':
