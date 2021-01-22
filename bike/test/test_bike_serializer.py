@@ -4,7 +4,6 @@ from django.test import TestCase
 from bike.serializers import BikeSerializer
 from bike.models import Bike
 from wheel.models import FrontWheel, RearWheel
-from IPython import embed
 
 
 class BikeSerializerTest(TestCase):

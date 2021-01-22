@@ -1,7 +1,6 @@
 """Bike serializer."""
 from bike.models import Bike
 from rest_framework import serializers
-from IPython import embed
 
 
 class BikeSerializer(serializers.ModelSerializer):
@@ -9,6 +8,7 @@ class BikeSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """Extra validations regarding wheels."""
+        # Wheel axles must be compatible with bike axles
         if data.get('f_wheel'):
             f_wheel = data['f_wheel']
             if data['f_axle'] != f_wheel.axle:
