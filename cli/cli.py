@@ -16,9 +16,28 @@ class BikeFetcher():
             option += 1
         return bike_dict
 
-class WheelFetcher()
-    def get_wheels(self):
-        
+class WheelFetcher():
+    def get_front_wheels(self):
+            response = requests.get('http://localhost:8000/wheels/front')
+            wheel_info = response.json()
+            option = 1
+            front_wheels_dict = {}
+            for front_wheel_attributes in front_wheel_info:
+                front_wheel = Bike(front_wheel_attributes)
+                front_wheel_dict[option] = bike
+                option += 1
+            return front_wheel_dict
+
+    def get_rear_wheels(self):
+            response = requests.get('http://localhost:8000/wheels/front')
+            wheel_info = response.json()
+            option = 1
+            rear_wheels_dict = {}
+            for rear_wheel_attributes in rear_wheel_info:
+                rear_wheel = Bike(rear_wheel_attributes)
+                rear_wheel_dict[option] = bike
+                option += 1
+            return rear_wheel_dict
 
 
 bikefetcher = BikeFetcher()
