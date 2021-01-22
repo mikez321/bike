@@ -1,11 +1,12 @@
 """Bike class representation for CLI."""
-from IPython import embed
+
 
 class Bike(object):
     """Bike object to be created from json response."""
 
     def __init__(self, attributes):
         """Initialize bike object from a dictionatry of attributes."""
+        self.db_ref = attributes['id']
         self.make = attributes['make']
         self.model = attributes['model']
         self.type = attributes['type']
@@ -40,6 +41,7 @@ class Bike(object):
 
     @property
     def front_axle_type(self):
+        """Return string representation of front axle type."""
         AXLE_TYPES = {
             1: 'qr',
             2: 'thru',
@@ -49,6 +51,7 @@ class Bike(object):
 
     @property
     def rear_axle_type(self):
+        """Return string representation of rear axle type."""
         AXLE_TYPES = {
             1: 'qr',
             2: 'thru',

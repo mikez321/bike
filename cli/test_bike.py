@@ -10,6 +10,7 @@ class BikeTest(unittest.TestCase):
     def test_it_exists(self):
         """A newly created bike is an instance of Bike and has attributes."""
         bike_attributes = {
+            'id': 1,
             'make': 'Specialized',
             'model': 'Chisel',
             'type': 2,
@@ -22,6 +23,7 @@ class BikeTest(unittest.TestCase):
         }
         bike = Bike(bike_attributes)
         self.assertEqual(type(bike), Bike)
+        self.assertEqual(bike.db_ref, 1)
         self.assertEqual(bike.make, 'Specialized')
         self.assertEqual(bike.model, 'Chisel')
         self.assertEqual(bike.type, 2)
@@ -35,6 +37,7 @@ class BikeTest(unittest.TestCase):
     def test_bike_properties(self):
         """Testing of model methods and properties."""
         bike_attributes = {
+            'id': 1,
             'make': 'Specialized',
             'model': 'Chisel',
             'type': 2,
