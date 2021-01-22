@@ -36,6 +36,8 @@ class BikeSerializerTest(TestCase):
             'description',
             'f_axle',
             'r_axle',
+            'f_wheel',
+            'r_wheel',
         ]
         omitted_keys = [
             'created_at',
