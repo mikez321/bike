@@ -1,7 +1,8 @@
+"""CLI tool for interacting with the API."""
+
 from bike import Bike
 from wheel import FrontWheel, RearWheel
 import requests
-import json
 from IPython import embed
 
 
@@ -16,6 +17,7 @@ class BikeFetcher():
             bike_dict[option] = bike
             option += 1
         return bike_dict
+
 
 class WheelFetcher():
     def get_front_wheels(self):
@@ -48,6 +50,14 @@ class WheelFetcher():
         return wheel_dict
 
 
+class WheelInstaller():
+    """Install a wheel on a bike through the API."""
+
+    def install(self, wheel, bike):
+        """Provided a wheel install it on the bike or handle error."""
+        response = requests.put('http://localhost:8000/wheels/rear')
+
+
 bikefetcher = BikeFetcher()
 wheelfetcher = WheelFetcher()
 bike_dict = bikefetcher.get_bikes()
@@ -71,8 +81,8 @@ print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
 print()
 print("Available Wheels:")
 for option, wheel in wheel_dict.items():
-    print(f"{option}:\t{wheel.manufacturer} {wheel.model}")
-wheel_choice = input("Choose a rear wheel to install: ")
+    print(f"{option}:\t{wheel.manufacturer} {wheel.model} ({wheel.wheel_type}/{wheel.axle_type})")
+wheel_choice = input("Choose a wheel to install: ")
 wheel = wheel_dict[int(wheel_choice)]
 print()
 print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}")
