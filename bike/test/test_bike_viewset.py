@@ -24,6 +24,7 @@ class BikeEndpointTest(TestCase):
             model='Goodship',
             type=1,
             description='A steel and carbon road bike.',
+            brake_type=2,
             f_axle=1,
             r_axle=1,
         )

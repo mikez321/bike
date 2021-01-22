@@ -50,7 +50,7 @@ class FrontWheel(GenericWheel):
     def __str__(self):
         """Magic string method."""
         brake = "Disc" if self.is_disc else "Rim"
-        return f"{self.manufacturer} {self.model} {brake} Front Wheel"
+        return f"{self.manufacturer} {self.model} {brake} Brake Front Wheel"
 
 
 class RearWheel(GenericWheel):
@@ -79,4 +79,4 @@ class RearWheel(GenericWheel):
     def __str__(self):
         """Magic string method."""
         brake = "Disc" if self.is_disc else "Rim"
-        return f"{self.manufacturer} {self.model} {brake} Rear Wheel"
+        return f"{self.manufacturer} {self.model} {brake} Brake Rear Wheel"

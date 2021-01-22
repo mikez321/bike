@@ -19,6 +19,10 @@ class Bike(models.Model):
         (2, 'Thru'),
         (3, 'Other'),
     ]
+    BRAKE_TYPE_CHOICES = [
+        (1, 'Disc'),
+        (2, 'Rim'),
+    ]
     make = models.CharField(max_length=30, blank=False, null=False)
     model = models.CharField(max_length=30, blank=False, null=False)
     type = models.IntegerField(
@@ -27,6 +31,12 @@ class Bike(models.Model):
         null=False
     )
     description = models.TextField(max_length=200, blank=True, null=True)
+    brake_type = models.IntegerField(
+        choices=BRAKE_TYPE_CHOICES,
+        default=1,
+        blank=False,
+        null=False,
+    )
     f_axle = models.IntegerField(
         choices=AXLE_TYPE_CHOICES,
         default=3,

@@ -22,6 +22,7 @@ class BikeModelTest(TestCase):
             model='Goodship',
             type=1,
             description='A steel and carbon road bike.',
+            brake_type=2,
             f_axle=1,
             r_axle=1,
         )
@@ -36,5 +37,7 @@ class BikeModelTest(TestCase):
         self.assertEqual(bike.description, "It's a hardtail 29er.")
         self.assertEqual(bike.f_axle, 2)
         self.assertEqual(bike.r_axle, 2)
+        self.assertEqual(bike.brake_type, 1)
+        self.assertEqual(bike.get_brake_type_display(), "Disc")
         self.assertEqual(bike.get_f_axle_display(), 'Thru')
         self.assertEqual(bike.get_r_axle_display(), 'Thru')
