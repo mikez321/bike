@@ -9,7 +9,7 @@ class RearWheelModelTest(TestCase):
 
     def setUp(self):
         """Create a wheel to test."""
-        self.f_wheel = RearWheel.objects.create(
+        self.r_wheel = RearWheel.objects.create(
             manufacturer='DT Swiss',
             model='240s',
             material=2,
