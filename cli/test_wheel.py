@@ -40,7 +40,7 @@ class FrontWheelTest(unittest.TestCase):
             'material': 2,
         }
         f_wheel = FrontWheel(f_wheel_attributes)
-        self.assertEqual(f_wheel.axle_type, 'thru')
+        self.assertEqual(f_wheel.axle_type, 'ta')
         self.assertEqual(f_wheel.material_type, 'alloy')
 
 
@@ -85,11 +85,11 @@ class RearWheelTest(unittest.TestCase):
             'spoke_count': 32,
             'material': 2,
             'driver': 1,
-            'single_speed': False,
+            'single_speed_only': False,
             'fixed': False
         }
         r_wheel = RearWheel(r_wheel_attributes)
-        self.assertEqual(r_wheel.axle_type, 'thru')
+        self.assertEqual(r_wheel.axle_type, 'ta')
         self.assertEqual(r_wheel.material_type, 'alloy')
         self.assertEqual(r_wheel.driver_type, 'shimano/sram 11s')
 

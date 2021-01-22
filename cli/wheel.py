@@ -19,7 +19,7 @@ class Wheel(object):
         """Return a string representation of axle type."""
         AXLE_TYPES = {
             1: "qr",
-            2: "thru",
+            2: "ta",
             3: "other",
         }
         return AXLE_TYPES[self.axle]
