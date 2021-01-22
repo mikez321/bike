@@ -58,7 +58,7 @@ class RearWheelTest(unittest.TestCase):
             'spoke_count': 32,
             'material': 2,
             'driver': 1,
-            'single_speed': False,
+            'single_speed_only': False,
             'fixed': False
         }
         r_wheel = RearWheel(r_wheel_attributes)

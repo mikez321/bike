@@ -46,7 +46,7 @@ class RearWheel(Wheel):
         """All the same stuff as a regular wheel and a few extras."""
         super().__init__(r_wheel_attributes)
         self.driver = r_wheel_attributes['driver']
-        self.single_speed = r_wheel_attributes['single_speed']
+        self.single_speed = r_wheel_attributes['single_speed_only']
         self.fixed = r_wheel_attributes['fixed']
 
     @property
