@@ -1,5 +1,4 @@
 """Wheel object."""
-from IPython import embed
 
 class Wheel(object):
     """A regular 'ol wheel."""
