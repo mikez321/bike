@@ -4,6 +4,7 @@ from django.test import TestCase
 from bike.serializers import BikeSerializer
 from bike.models import Bike
 from wheel.models import FrontWheel, RearWheel
+from django.db import transaction
 
 
 class BikeSerializerTest(TestCase):
@@ -75,49 +76,38 @@ class BikeSerializerTest(TestCase):
 
     def test_validations(self):
         """Front wheels only go on the front, rears on the rear."""
-        self.bike_attributes['f_wheel'] = self.r_wheel.id
-        serializer = BikeSerializer(
-            instance=self.bike,
-            data=self.bike_attributes
-        )
-        self.assertFalse(serializer.is_valid())
+        f_wheel = FrontWheel(**self.f_wheel_attributes)
+        r_wheel = RearWheel(**self.r_wheel_attributes)
+        bike_attributes = self.bike_attributes
 
-        self.bike_attributes['f_wheel'] = None
-        self.bike_attributes['r_wheel'] = self.f_wheel.id
-        serializer = BikeSerializer(
-            instance=self.bike,
-            data=self.bike_attributes
-        )
-        self.assertFalse(serializer.is_valid())
-
-        self.bike_attributes['f_wheel'] = self.f_wheel.id
-        self.bike_attributes['r_wheel'] = self.r_wheel.id
-        serializer = BikeSerializer(
-            instance=self.bike,
-            data=self.bike_attributes
-        )
-        self.assertTrue(serializer.is_valid())
+        bike = Bike(**bike_attributes)
+        try:
+            with transaction.atomic():
+                bike.f_wheel = r_wheel
+            self.fail("Rear wheels can't go on the front.")
+        except ValueError:
+            pass
+        try:
+            with transaction.atomic():
+                bike.r_wheel = f_wheel
+            self.fail("Front wheels can't go on the rear.")
+        except ValueError:
+            pass
 
     def test_custom_validations(self):
         """Axle types must match."""
-        self.f_wheel_attributes['axle'] = 2
-        wheel_fail1 = FrontWheel.objects.create(**self.f_wheel_attributes)
-        self.bike_attributes['f_wheel'] = wheel_fail1.id
-        serializer = BikeSerializer(
-            instance=self.bike,
-            data=self.bike_attributes
-        )
-        self.assertFalse(serializer.is_valid())
-        self.assertTrue(
-            'Axle types must match!' in serializer.errors['non_field_errors']
-        )
+        f_wheel_attributes = self.f_wheel_attributes
+        bike_attributes = self.bike_attributes
 
-        self.r_wheel_attributes['axle'] = 3
-        wheel_fail2 = RearWheel.objects.create(**self.r_wheel_attributes)
-        self.bike_attributes['r_wheel'] = wheel_fail2.id
+        f_wheel_attributes['axle'] = 2
+        wheel_fail1 = FrontWheel.objects.create(**f_wheel_attributes)
+        bike_attributes['f_wheel'] = wheel_fail1
+
+        # Wheel now has axle type2 (thru-axle) and bike has axle type 1 (QR)
+
         serializer = BikeSerializer(
             instance=self.bike,
-            data=self.bike_attributes
+            data=bike_attributes
         )
         self.assertFalse(serializer.is_valid())
         self.assertTrue(
@@ -126,11 +116,17 @@ class BikeSerializerTest(TestCase):
 
     def test_more_custom_validations(self):
         """Brake types must match between wheels and bikes."""
-        self.bike_attributes['f_wheel'] = self.f_wheel.id
-        self.bike_attributes['brake_type'] = 1
+        bike_attributes = self.bike_attributes
+        f_wheel = FrontWheel.objects.create(**self.f_wheel_attributes)
+        bike_attributes['brake_type'] = 1
+        bike_attributes['f_wheel'] = f_wheel
+
+        fail_bike = Bike(**bike_attributes)
+        self.assertEqual(f_wheel.is_disc, False)
+        self.assertEqual(fail_bike.get_brake_type_display(), "Disc")
         serializer = BikeSerializer(
-            instance=self.bike,
-            data=self.bike_attributes
+            instance=fail_bike,
+            data=bike_attributes
         )
         self.assertFalse(serializer.is_valid())
         self.assertTrue(
