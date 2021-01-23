@@ -95,24 +95,34 @@ And at this point you should be pretty set!
 The basic layout of the app is as follows:
 ```
 .
+├── Makefile
+├── README.md
 ├── api
 │   ├── settings.py
-│   └── urls.py
+│   ├── urls.py
 ├── bike
 │   ├── admin.py
+│   ├── apps.py
 │   ├── migrations
 │   ├── models.py
 │   ├── serializers.py
-│   ├── test
 │   └── views.py
+├── cli
+│   ├── apiconnector.py
+│   ├── bike.py
+│   ├── bikefetcher.py
+│   ├── cli.py
+│   ├── wheel.py
+│   ├── wheelfetcher.py
+│   └── wheelinstaller.py
 ├── db_seed.json
 ├── manage.py
+├── requirements.txt
 └── wheel
     ├── admin.py
     ├── migrations
     ├── models.py
     ├── serializers.py
-    ├── test
     └── views.py
 ```
 __api__: This is the main application which holds the overall urls.py and settings for the application.  It is named API because... well the app is an API!
@@ -120,6 +130,8 @@ __api__: This is the main application which holds the overall urls.py and settin
 __bike__: The bike app contains everything bike-related.  Here you can find bike models, serializers, and viewsets.  All tests for bike-related things can be found in the test folder, and migrations for bike models will be housed in the migrations folder.
 
 __wheel__: The wheel app is to wheels as bike is to bikes.  However, since we've got front and rear wheels, there are separate models for each which inherit from a generic wheel model.
+
+__cli__: A command line tool used to interact with the api.
 
 
 ### Testing
@@ -148,3 +160,17 @@ __Wheel__:  Wheel objects have less open access than bikes and use ViewSets as w
 `GET /wheels/rear` is a list of all rear wheels
 
 `GET /wheels/(front/rear)/<pk>` will return whatever combo of front/rear wheel and its PK.
+
+
+### CLI Tool
+Included in the project is a command line tool for interacting with the API.  It is broken up into different modules for accessing different parts of the API like bikes and wheels, and has a dedicated ApiConnector module used to change the endpoints of the API in a single place.  For convenience, it is executed by a small script located in a Makefile at the root of the project.
+
+After the project is set up, you can start a server with:
+
+`pym runserver`
+
+And then in a new terminal window/tab simply run the makefile by typing:
+
+`make`
+
+The makefile will run `python3 cli/cli.py` and start the CLI tool.  From here you can interact with the API and enjoy all validations written for wheels and bikes in real-time.  Changes will be made to the local database and can be undone through the admin console.  The CLI will automatically set front and rear wheels so you don't have to worry about installing a front wheel in the back or vice-versa.
