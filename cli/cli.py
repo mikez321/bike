@@ -77,7 +77,7 @@ while True:
             print("Bye!")
             break
         elif choice.isnumeric() is False or int(choice) not in wheel_dict.keys():
-            time.sleep(3)
+            time.sleep(1)
             print("\n" * 2)
             print("*" * 40)
             print("Plese select a valid wheel option or press 'q' to exit.")
@@ -87,6 +87,6 @@ while True:
             wheel = wheel_dict[wheel_choice]
             print()
             print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}...")
-            time.sleep(3)
+            time.sleep(1)
             wheelinstaller = WheelInstaller()
             print(wheelinstaller.install(wheel, bike))
