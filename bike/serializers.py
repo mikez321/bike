@@ -23,15 +23,15 @@ class BikeSerializer(serializers.ModelSerializer):
                 )
         if data.get('f_wheel'):
             f_wheel = data['f_wheel']
-            if (f_wheel.is_disc and data['brake_type'] == 2
-                    or f_wheel.is_disc is False and data['brake_type'] == 1):
+            if (f_wheel.is_disc is False and data['brake_type'] != 2
+                    or f_wheel.is_disc and data['brake_type'] != 1):
                 raise serializers.ValidationError(
                     "Brake types must match!"
                 )
         if data.get('r_wheel'):
             r_wheel = data['r_wheel']
-            if (r_wheel.is_disc and data['brake_type'] == 2
-                    or r_wheel.is_disc is False and data['brake_type'] == 1):
+            if (r_wheel.is_disc is False and data['brake_type'] != 2
+                    or r_wheel.is_disc and data['brake_type'] != 1):
                 raise serializers.ValidationError(
                     "Brake types must match!"
                 )
