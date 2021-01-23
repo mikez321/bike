@@ -6,6 +6,33 @@ from wheelinstaller import WheelInstaller
 import time
 
 
+def bike_details(bike):
+    """Return details of a given bike."""
+    if bike.f_wheel:
+        f_wheel = list(
+            filter(
+                lambda w: w.db_ref == bike.f_wheel, wheel_dict.values()
+            )
+        )[0]
+    else:
+        f_wheel = ' -- '
+    if bike.r_wheel:
+        r_wheel = list(
+            filter(
+                lambda w: w.db_ref == bike.r_wheel, wheel_dict.values()
+            )
+        )[0]
+    else:
+        r_wheel = ' -- '
+    print(f"\nBike: {bike.make} {bike.model}")
+    print("_" * 40)
+    print(f"-Type: {bike.bike_type.capitalize()}")
+    print(f"-Brakes: {bike.brake_type.capitalize()}")
+    print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
+    print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
+    print(f"-Front Wheel: {f_wheel}")
+    print(f"-Rear Wheel: {r_wheel}")
+
 bikefetcher = BikeFetcher()
 wheelfetcher = WheelFetcher()
 bike_dict = bikefetcher.get_bikes()
@@ -30,47 +57,16 @@ while True:
 
 while True:
     bike = bikefetcher.get_bike(chosen_bike_db_ref)
-    if bike.f_wheel:
-        f_wheel = list(
-            filter(
-                lambda w: w.db_ref == bike.f_wheel, wheel_dict.values()
-            )
-        )[0]
-    else:
-        f_wheel = ' -- '
-    if bike.r_wheel:
-        r_wheel = list(
-            filter(
-                lambda w: w.db_ref == bike.r_wheel, wheel_dict.values()
-            )
-        )[0]
-    else:
-        r_wheel = ' -- '
 
     if bike.f_wheel is not None and bike.r_wheel is not None:
         print('*' * 40)
-        print(f"\nBike: {bike.make} {bike.model}")
-        print("_" * 40)
-        print(f"-Type: {bike.bike_type.capitalize()}")
-        print(f"-Brakes: {bike.brake_type.capitalize()}")
-        print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
-        print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
-        print(f"-Front Wheel: {f_wheel}")
-        print(f"-Rear Wheel: {r_wheel}")
+        bike_details(bike)
         print('*' * 40)
         print("One bike... two wheels... all set!")
         break
     else:
-        print(f"\nBike: {bike.make} {bike.model}")
-        print("_" * 40)
-        print(f"-Type: {bike.bike_type.capitalize()}")
-        print(f"-Brakes: {bike.brake_type.capitalize()}")
-        print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
-        print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
-        print(f"-Front Wheel: {f_wheel}")
-        print(f"-Rear Wheel: {r_wheel}")
-        print()
-        print("Available Wheels:")
+        bike_details(bike)
+        print("\nAvailable Wheels:")
         print("_" * 40)
         for option, wheel in wheel_dict.items():
             print(f"{option}:\t{wheel.manufacturer} {wheel.model} ({wheel.wheel_type}/{wheel.axle_type})")
