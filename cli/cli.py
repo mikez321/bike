@@ -3,6 +3,7 @@
 from bikefetcher import BikeFetcher
 from wheelfetcher import WheelFetcher
 from wheelinstaller import WheelInstaller
+from termcolor import colored
 import time
 
 
@@ -76,7 +77,7 @@ while True:
             print("Bye!")
             break
         elif choice.isnumeric() is False or int(choice) not in wheel_dict.keys():
-            time.sleep(1)
+            time.sleep(3)
             print("\n" * 2)
             print("*" * 40)
             print("Plese select a valid wheel option or press 'q' to exit.")
@@ -85,7 +86,7 @@ while True:
             wheel_choice = int(choice)
             wheel = wheel_dict[wheel_choice]
             print()
-            print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}")
-            time.sleep(1)
+            print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}...")
+            time.sleep(3)
             wheelinstaller = WheelInstaller()
             print(wheelinstaller.install(wheel, bike))
