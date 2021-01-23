@@ -3,6 +3,7 @@
 from bike import Bike
 from wheel import FrontWheel, RearWheel
 import requests
+import time
 from IPython import embed
 
 
@@ -90,6 +91,7 @@ while True:
         break
     else:
         print(f"Bike: {bike.make} {bike.model}")
+        print("_" * 40)
         print(f"-Type: {bike.bike_type.capitalize()}")
         print(f"-Brakes: {bike.brake_type.capitalize()}")
         print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
@@ -102,9 +104,22 @@ while True:
         print("Available Wheels:")
         for option, wheel in wheel_dict.items():
             print(f"{option}:\t{wheel.manufacturer} {wheel.model} ({wheel.wheel_type}/{wheel.axle_type})")
-        wheel_choice = input("Choose a wheel to install: ")
-        wheel = wheel_dict[int(wheel_choice)]
-        print()
-        print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}")
-        wheelinstaller = WheelInstaller()
-        print(wheelinstaller.install(wheel, bike))
+        print("\n Chose a wheel to install on the bike, or press 'q' at any time to exit.")
+        choice = input()
+        if choice.casefold() == 'q':
+            print("Bye!")
+            break
+        elif choice.isnumeric() is False or int(choice) not in wheel_dict.keys():
+            time.sleep(1)
+            print("\n" * 2)
+            print("*" * 40)
+            print("Plese select a valid wheel option or press 'q' to exit.")
+            print("*" * 40)
+        else:
+            wheel_choice = int(choice)
+            wheel = wheel_dict[wheel_choice]
+            print()
+            print(f"Installing {wheel.manufacturer} {wheel.model} on {bike.make} {bike.model}")
+            time.sleep(1)
+            wheelinstaller = WheelInstaller()
+            print(wheelinstaller.install(wheel, bike))
