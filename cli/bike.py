@@ -14,8 +14,8 @@ class Bike(object):
         self.brakes = attributes['brake_type']
         self.f_axle = attributes['f_axle']
         self.r_axle = attributes['r_axle']
-        self.f_wheel = None
-        self.r_wheel = None
+        self.f_wheel = attributes.get('f_wheel')
+        self.r_wheel = attributes.get('r_wheel')
 
     @property
     def bike_type(self):

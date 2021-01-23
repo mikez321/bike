@@ -44,6 +44,10 @@ class FrontWheel(Wheel):
         """Front wheels are of type 'front'."""
         return 'front'
 
+    def __str__(self):
+        """Magic string method."""
+        return f"{self.manufacturer} {self.model}"
+
 
 class RearWheel(Wheel):
     """A rear wheel object."""
@@ -72,3 +76,7 @@ class RearWheel(Wheel):
     def wheel_type(self):
         """Rear wheels are of type 'rear'."""
         return 'rear'
+
+    def __str__(self):
+        """Magic string method."""
+        return f"{self.manufacturer} {self.model}"
