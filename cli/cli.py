@@ -4,6 +4,7 @@ from bike import Bike
 from wheel import FrontWheel, RearWheel
 import requests
 import time
+import re
 from IPython import embed
 
 
@@ -18,6 +19,12 @@ class BikeFetcher():
             bike_dict[option] = bike
             option += 1
         return bike_dict
+
+    def get_bike(self, bike_db_ref):
+        response = requests.get(f"http://localhost:8000/bikes/{bike_db_ref}")
+        bike_info = response.json()
+        bike = Bike(bike_info)
+        return bike
 
 
 class WheelFetcher():
@@ -56,7 +63,7 @@ class WheelInstaller():
 
     def install(self, wheel, bike):
         """Install a wheel on the bike or handle error."""
-        bike_info = bike.__dict__
+        bike_info = bike.__dict__.copy()
         bike_info['brake_type'] = bike.brakes
         location = 'f_wheel' if wheel.wheel_type == 'front' else 'r_wheel'
         bike_info[location] = wheel.db_ref
@@ -65,10 +72,16 @@ class WheelInstaller():
             bike_info,
         )
         if response.status_code == 200:
-            return "Install went smooth!"
+            return f"{wheel.model.capitalize()} was installed!"
+        if response.status_code == 400:
+            if 'field_errors' in response.content.decode():
+                error = response.content.decode().split('[')[1]
+                result = re.findall('[A-z \s !]+', error)
+                return result[0]
+            else:
+                return "Looks like that wheel might not be compatible or one might already be on the bike."
         else:
-            embed()
-            return "Something went wrong..."
+            return "Something went wrong. Try again..."
 
 
 bikefetcher = BikeFetcher()
@@ -90,11 +103,39 @@ while True:
         print("*" * 40)
     else:
         bike_choice = int(choice)
-        bike = bike_dict[bike_choice]
+        chosen_bike_db_ref = bike_dict[bike_choice].db_ref
         break
 
 while True:
+    bike = bikefetcher.get_bike(chosen_bike_db_ref)
+    if bike.f_wheel:
+        f_wheel = list(
+            filter(
+                lambda w: w.db_ref == bike.f_wheel, wheel_dict.values()
+            )
+        )[0]
+    else:
+        f_wheel = ' -- '
+    if bike.r_wheel:
+        r_wheel = list(
+            filter(
+                lambda w: w.db_ref == bike.r_wheel, wheel_dict.values()
+            )
+        )[0]
+    else:
+        r_wheel = ' -- '
+
     if bike.f_wheel is not None and bike.r_wheel is not None:
+        print('*' * 40)
+        print(f"\nBike: {bike.make} {bike.model}")
+        print("_" * 40)
+        print(f"-Type: {bike.bike_type.capitalize()}")
+        print(f"-Brakes: {bike.brake_type.capitalize()}")
+        print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
+        print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
+        print(f"-Front Wheel: {f_wheel}")
+        print(f"-Rear Wheel: {r_wheel}")
+        print('*' * 40)
         print("One bike... two wheels... all set!")
         break
     else:
@@ -104,10 +145,8 @@ while True:
         print(f"-Brakes: {bike.brake_type.capitalize()}")
         print(f"-Front Axle: {bike.front_axle_type.capitalize()}")
         print(f"-Rear_Axle: {bike.rear_axle_type.capitalize()}")
-        current_f_wheel = 'installed' if bike.f_wheel else ' -- '
-        print(f"-Front Wheel: {current_f_wheel.capitalize()}")
-        current_r_wheel = 'installed' if bike.r_wheel else ' -- '
-        print(f"-Rear Wheel: {current_r_wheel.capitalize()}")
+        print(f"-Front Wheel: {f_wheel}")
+        print(f"-Rear Wheel: {r_wheel}")
         print()
         print("Available Wheels:")
         print("_" * 40)
