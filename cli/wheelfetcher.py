@@ -1,14 +1,16 @@
 """Module used to get wheel information from bike API."""
-import requests
 from wheel import FrontWheel, RearWheel
+from apiconnector import ApiConnector
 
 
 class WheelFetcher():
     """Wheel retrieval functions."""
 
+    conn = ApiConnector()
+
     def get_front_wheels(self):
         """Return all front wheels from the API as front wheel objects."""
-        response = requests.get('http://localhost:8000/wheels/front')
+        response = self.conn.get_request('wheels/front/')
         wheel_info = response.json()
         front_wheels = []
         for wheel_attributes in wheel_info:
@@ -18,7 +20,7 @@ class WheelFetcher():
 
     def get_rear_wheels(self):
         """Return all rear wheels from the api as rear wheel objects."""
-        response = requests.get('http://localhost:8000/wheels/rear')
+        response = self.conn.get_request('wheels/rear/')
         wheel_info = response.json()
         rear_wheels = []
         for wheel_attributes in wheel_info:

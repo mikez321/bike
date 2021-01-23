@@ -1,10 +1,12 @@
 """Module used to interact with API and install wheels on a bike."""
-import requests
 import re
+from apiconnector import ApiConnector
 
 
 class WheelInstaller():
     """Wheel installation functions."""
+
+    conn = ApiConnector()
 
     def install(self, wheel, bike):
         """Install a wheel on the bike or handle error."""
@@ -12,10 +14,9 @@ class WheelInstaller():
         bike_info['brake_type'] = bike.brakes
         location = 'f_wheel' if wheel.wheel_type == 'front' else 'r_wheel'
         bike_info[location] = wheel.db_ref
-        response = requests.patch(
-            f"http://localhost:8000/bikes/{bike.db_ref}/",
-            bike_info,
-        )
+
+        response = self.conn.update_request(f"bikes/{bike.db_ref}/", bike_info)
+        
         if response.status_code == 200:
             return f"{wheel.model.capitalize()} was installed!"
         if response.status_code == 400:

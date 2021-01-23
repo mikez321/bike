@@ -1,5 +1,6 @@
 """Wheel object."""
 
+
 class Wheel(object):
     """A regular 'ol wheel."""
 
