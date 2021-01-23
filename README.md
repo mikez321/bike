@@ -137,6 +137,10 @@ __cli__: A command line tool used to interact with the api.
 ### Testing
 All models, serializers, and views are tested for happy path and a few sad-paths in serializers.  Custom validators ensure bikes can only accept wheels with matching axles and brakes (very generally).  Also, with the help of built-in Django validators, front wheels can only be accepted on the front wheel area of a bike (fork), and rear wheels can only go in the back.
 
+CLI tools are also tested.  The CLI creates bike and wheel objects from information gathered from the API.  All models and model methods are tested in the CLI.
+
+Testing for the API can be run with `pym test`.  There are currently 22 tests.  As the CLI is an included add-on, it is not part of the app and individual unittest tests are written and live in the CLI folder.  They can be run individually with `python3 <test_name>.py`.
+
 
 ### Endpoints
 __Bike__:  Bikes use Django ModelViewSets, and therefore have full CRUD functionalty.  They are accessed through `/bikes/` REST endpoints.
