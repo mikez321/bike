@@ -67,6 +67,7 @@ class WheelInstaller():
         if response.status_code == 200:
             return "Install went smooth!"
         else:
+            embed()
             return "Something went wrong..."
 
 
@@ -74,23 +75,30 @@ bikefetcher = BikeFetcher()
 wheelfetcher = WheelFetcher()
 bike_dict = bikefetcher.get_bikes()
 wheel_dict = wheelfetcher.get_wheels()
-print("\n" * 5)
-print("*" * 60)
+print("\n" * 2)
+print("*" * 50)
 print("Hey! Let's put some wheels on a bike!")
-print("*" * 60)
-print()
-print("Available Bikes:")
-for option, bike in bike_dict.items():
-    print(f"{option}:\t{bike.make} {bike.model}")
-print()
-bike_choice = input("Choose a bike: ")
-bike = bike_dict[int(bike_choice)]
+print("*" * 50)
+while True:
+    print("Available Bikes:")
+    for option, bike in bike_dict.items():
+        print(f"{option}:\t{bike.make} {bike.model}")
+    choice = input("\nChoose a bike: ")
+    if choice.isnumeric() is False or int(choice) not in bike_dict.keys():
+        print("*" * 40)
+        print("Plese select a valid bike option to get started.")
+        print("*" * 40)
+    else:
+        bike_choice = int(choice)
+        bike = bike_dict[bike_choice]
+        break
+
 while True:
     if bike.f_wheel is not None and bike.r_wheel is not None:
         print("One bike... two wheels... all set!")
         break
     else:
-        print(f"Bike: {bike.make} {bike.model}")
+        print(f"\nBike: {bike.make} {bike.model}")
         print("_" * 40)
         print(f"-Type: {bike.bike_type.capitalize()}")
         print(f"-Brakes: {bike.brake_type.capitalize()}")
@@ -102,6 +110,7 @@ while True:
         print(f"-Rear Wheel: {current_r_wheel.capitalize()}")
         print()
         print("Available Wheels:")
+        print("_" * 40)
         for option, wheel in wheel_dict.items():
             print(f"{option}:\t{wheel.manufacturer} {wheel.model} ({wheel.wheel_type}/{wheel.axle_type})")
         print("\n Chose a wheel to install on the bike, or press 'q' at any time to exit.")
