@@ -4,6 +4,7 @@ __pycache__
 *.sqlite3
 .env
 get-pip.py
+Pipfile
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
