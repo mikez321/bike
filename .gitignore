@@ -3,3 +3,4 @@ Pycache
 __pycache__
 *.sqlite3
 .env
+get-pip.py
