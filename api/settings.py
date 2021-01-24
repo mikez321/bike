@@ -26,7 +26,10 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['mike-bike.eba-zn7bvz6q.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = [
+    'localhost',
+    'mike-bike.eba-zn7bvz6q.us-west-2.elasticbeanstalk.com',
+]
 
 
 # Application definition
