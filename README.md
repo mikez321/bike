@@ -21,6 +21,10 @@ Create a virtual environment:
 
 `python3 -m venv env`
 
+Activate it:
+
+`source env/bin/activate`
+
 Install necessary packages using the provided requirements.txt.  For help with Python packages, go [here](https://packaging.python.org/tutorials/installing-packages/):
 
 `pip install -r requirements.txt`
