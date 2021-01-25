@@ -21,6 +21,10 @@ Create a virtual environment:
 
 `python3 -m venv env`
 
+Activate it:
+
+`source env/bin/activate`
+
 Install necessary packages using the provided requirements.txt.  For help with Python packages, go [here](https://packaging.python.org/tutorials/installing-packages/):
 
 `pip install -r requirements.txt`
@@ -187,3 +191,25 @@ And then in a new terminal window/tab simply run the makefile by typing:
 `make`
 
 The makefile will run `python3 cli/cli.py` and start the CLI tool.  From here you can interact with the API and enjoy all validations written for wheels and bikes in real-time.  Changes will be made to the local database and can be undone through the admin console.  The CLI will automatically set front and rear wheels so you don't have to worry about installing a front wheel in the back or vice-versa.
+
+__Using the CLI:__
+
+Running the CLI will present the following screen.  Bikes are pulled from the API and displayed.
+
+![Startup](readme_images/start.png)
+
+After a bike is selected, it will be displayed on the screen with some basic info.  A list of wheels will also be displayed.
+
+![Selected Bike](readme_images/selected.png)
+
+Choosing a wheel will install it on the bike.  A 1 second pause has been added for an improved user experience.  Choosing a wheel with the correct combo of axle and brake for the selected bike will result in a positive message and the wheel will be installed.
+
+![Success](readme_images/success.png)
+
+And if the combo is not compatible, the error produced by the API is returned.
+
+![Error](readme_images/error.png)
+
+Finally, when two successful wheels have been added to a bike.  The program will show the bike with wheels added and will exit.
+
+![Complete](readme_images/complete.png)
