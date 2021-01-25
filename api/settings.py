@@ -28,7 +28,7 @@ DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = [
     'localhost',
-    'mike-bike.eba-zn7bvz6q.us-west-2.elasticbeanstalk.com',
+    'bike-api-env.us-west-2.elasticbeanstalk.com',
 ]
 
 
