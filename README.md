@@ -202,7 +202,7 @@ After a bike is selected, it will be displayed on the screen with some basic inf
 
 ![Selected Bike](readme_images/selected.png)
 
-Choosing a wheel will install it on the bike.  A 1 second pause has been added for an improved user interface.  Choosing a wheel with the correct combo of axle and brake for the selected bike will result in a positive message and the wheel will be installed.
+Choosing a wheel will install it on the bike.  A 1 second pause has been added for an improved user experience.  Choosing a wheel with the correct combo of axle and brake for the selected bike will result in a positive message and the wheel will be installed.
 
 ![Success](readme_images/success.png)
 
