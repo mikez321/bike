@@ -3,6 +3,9 @@
 This is a simple API created with Python 3.8.4 Django 3.1.5 and Django REST Framework 3.12.2. It exposes bike and wheel objects.  By utilizing a PUT/PATCH endpoint you can add a front wheel and rear wheel to a bike object.
 
 ### Setup:
+
+__ITS ALIVE!__:  _As of 1/25/21 this api now lives on AWS Elastic Beanstalk.  The CLI will require setup, but after requirements are installed it will run._
+
 Python is required, and you don't have it, you can get a version of it [here](https://www.python.org/downloads/).
 
 While not "required" I highly suggest adding an alias for 'python manage.py...' as you will be running that quite a lot in Django/DRF.  I use the alias `pym` and will refer to it below.  To add an alias, open your bash/zsh profile and add the following:
@@ -66,6 +69,8 @@ traitlets==5.0.5
 urllib3==1.26.2
 wcwidth==0.2.5
 ```
+
+_As mentioned above, at this point you should have gone through enough setup to run the CLI, but you've come this far, so might as well finish right?_
 
 Of note will be Django and Django REST framework, but also `python-dotenv` which is used to hide secrets and `ipython` which is an incredibly helpful debugging tool.
 
