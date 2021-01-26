@@ -6,7 +6,7 @@ import requests
 class ApiConnector():
     """Reusable module allowing connection to the bike API."""
 
-    destination = 'http://localhost:8000/'
+    destination = 'http://bike-api-env.us-west-2.elasticbeanstalk.com/'
 
     def get_request(self, resource):
         """Get request template."""
