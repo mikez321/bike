@@ -1,6 +1,7 @@
 """Bike app models found here."""
 from django.db import models
 from wheel.models import FrontWheel, RearWheel
+from bike.managers import RoadBikeManager, MountainBikeManager
 
 
 class Bike(models.Model):
@@ -65,6 +66,10 @@ class Bike(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
+    roadbikes = RoadBikeManager()
+    mountainbikes = MountainBikeManager()
 
     def __str__(self):
         """Magic string method."""
