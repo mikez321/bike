@@ -4,7 +4,7 @@ This is a simple API created with Python 3.8.4 Django 3.1.5 and Django REST Fram
 
 ### Setup:
 
-__ITS ALIVE!__:  _As of 1/25/21 this api now lives on AWS Elastic Beanstalk.  The CLI will require setup, but after requirements are installed it will run._
+~~__ITS ALIVE!__:  _As of 1/25/21 this api now lives on AWS Elastic Beanstalk.  The CLI will require setup, but after requirements are installed it will run._~~
 
 Python is required, and you don't have it, you can get a version of it [here](https://www.python.org/downloads/).
 
